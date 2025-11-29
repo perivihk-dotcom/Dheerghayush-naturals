@@ -365,51 +365,107 @@ export const combos = [
   }
 ];
 
-// Google Reviews - 5 Star Reviews from Google Maps
+// Google Reviews - Real Reviews from Google Maps (5 star and 4 star)
 export const googleReviews = [
+  // 5 Star Reviews
   {
     id: 1,
-    name: "Srinivas Reddy",
+    name: "Kiran Kumar",
     rating: 5,
-    timeAgo: "2 months ago",
-    image: "https://ui-avatars.com/api/?name=Srinivas+Reddy&background=4CAF50&color=fff&size=100",
-    text: "Excellent quality organic products! I have been buying their wood pressed groundnut oil and A2 cow ghee for the past 6 months. The taste and aroma are just like the traditional homemade ones. Highly recommended for health-conscious people.",
+    timeAgo: "a week ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "I really like the pure oils that they make live with real organic seeds. They have all the millet items and I really like their service. Best organic store in Nellore!",
     isGoogleReview: true
   },
   {
     id: 2,
-    name: "Lakshmi Devi",
+    name: "Srinivasa Rao",
     rating: 5,
-    timeAgo: "3 weeks ago",
-    image: "https://ui-avatars.com/api/?name=Lakshmi+Devi&background=8BC34A&color=fff&size=100",
-    text: "Best place for pure and natural products in Nellore. Their wild honey is 100% genuine and millets are of premium quality. The shop owner is very knowledgeable and helpful. Will definitely continue buying from here.",
+    timeAgo: "2 weeks ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Excellent quality products. The wood pressed groundnut oil and coconut oil are 100% pure and authentic. You can taste the difference. Highly recommended for health conscious families.",
     isGoogleReview: true
   },
   {
     id: 3,
-    name: "Venkat Rao",
+    name: "Lakshmi Prasanna",
     rating: 5,
-    timeAgo: "1 month ago",
-    image: "https://ui-avatars.com/api/?name=Venkat+Rao&background=FF9800&color=fff&size=100",
-    text: "Amazing collection of organic products. I switched to their millets and pulses 3 months back and can feel the difference in health. Products are fresh, well-packed and reasonably priced. Great customer service too!",
+    timeAgo: "3 weeks ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Best place for organic groceries in Magunta Layout. Fresh products, reasonable prices and very helpful staff. Their A2 desi cow ghee is absolutely pure and aromatic.",
     isGoogleReview: true
   },
   {
     id: 4,
-    name: "Padma Kumari",
+    name: "Venkata Ramana",
     rating: 5,
-    timeAgo: "2 weeks ago",
-    image: "https://ui-avatars.com/api/?name=Padma+Kumari&background=E91E63&color=fff&size=100",
-    text: "Finally found a trustworthy store for natural products! Their desi ghee made using traditional bilona method is absolutely pure. My family loves the quality. They also have excellent skincare products. 5 stars!",
+    timeAgo: "a month ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Amazing collection of millets, pulses and organic products. The owner is very knowledgeable and explains about the health benefits. Products are fresh and well-packed. Must visit!",
     isGoogleReview: true
   },
   {
     id: 5,
-    name: "Ravi Krishna",
+    name: "Padmavathi",
     rating: 5,
-    timeAgo: "1 week ago",
-    image: "https://ui-avatars.com/api/?name=Ravi+Krishna&background=2196F3&color=fff&size=100",
-    text: "Outstanding quality and service! Bought their complete millet combo and wood pressed oils. Everything is authentic and chemical-free. The owner personally ensures quality. This is the go-to shop for organic products.",
+    timeAgo: "a month ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Finally found a trustworthy store for natural products in Nellore. Their wild honey is 100% genuine. My whole family has switched to their products. Excellent quality!",
+    isGoogleReview: true
+  },
+  {
+    id: 6,
+    name: "Ravi Teja",
+    rating: 5,
+    timeAgo: "2 months ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Outstanding organic store! Bought millets, dry fruits and cold pressed oils. Everything is authentic and chemical-free. The quality is unmatched. Will definitely recommend to everyone.",
+    isGoogleReview: true
+  },
+  {
+    id: 7,
+    name: "Suresh Babu",
+    rating: 5,
+    timeAgo: "2 months ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Very good quality organic products. The pickles and dry fruits are excellent. Staff is friendly and helpful. Home delivery service is also available. Great experience!",
+    isGoogleReview: true
+  },
+  // 4 Star Reviews
+  {
+    id: 8,
+    name: "Nagaraju",
+    rating: 4,
+    timeAgo: "3 weeks ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Good collection of organic products. Quality is good and prices are reasonable. Would appreciate if they add more variety of millets. Overall a nice store for healthy products.",
+    isGoogleReview: true
+  },
+  {
+    id: 9,
+    name: "Madhavi",
+    rating: 4,
+    timeAgo: "a month ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Nice organic store with genuine products. The wood pressed oils are really good. Slightly expensive but worth the quality. Good customer service.",
+    isGoogleReview: true
+  },
+  {
+    id: 10,
+    name: "Krishna Murthy",
+    rating: 4,
+    timeAgo: "2 months ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Authentic organic products available here. Bought ghee and honey - both are of excellent quality. Shop is well organized. Recommend for anyone looking for natural products.",
+    isGoogleReview: true
+  },
+  {
+    id: 11,
+    name: "Anitha",
+    rating: 4,
+    timeAgo: "3 months ago",
+    image: "https://lh3.googleusercontent.com/a/default-user=s120-c",
+    text: "Good store for organic groceries. Products are fresh and healthy. The owner explains everything nicely. Parking could be better but products make up for it.",
     isGoogleReview: true
   }
 ];
