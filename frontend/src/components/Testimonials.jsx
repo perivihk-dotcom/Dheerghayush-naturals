@@ -17,6 +17,24 @@ const StarRating = ({ rating, size = 16 }) => {
   );
 };
 
+// Google Profile Avatar Component
+const GoogleAvatar = ({ name, rating }) => {
+  const colors = rating === 5 
+    ? ['#4285F4', '#EA4335', '#FBBC05', '#34A853', '#FF6D01', '#46BDC6']
+    : ['#9E9E9E', '#607D8B', '#795548', '#78909C'];
+  const randomColor = colors[name.length % colors.length];
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  
+  return (
+    <div 
+      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-lg"
+      style={{ backgroundColor: randomColor }}
+    >
+      {initials}
+    </div>
+  );
+};
+
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
@@ -30,9 +48,13 @@ const Testimonials = () => {
   };
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 6000);
+    const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  // Separate 5-star and 4-star reviews for display
+  const fiveStarReviews = testimonials.filter(t => t.rating === 5);
+  const fourStarReviews = testimonials.filter(t => t.rating === 4);
 
   return (
     <section className="py-12 bg-white">
@@ -50,22 +72,24 @@ const Testimonials = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-5 py-2.5 shadow-sm hover:shadow-md transition-shadow"
           >
-            <img 
-              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
-              alt="Google" 
-              className="h-5 object-contain"
-            />
+            <svg className="w-6 h-6" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
             <div className="flex items-center gap-2">
               <span className="text-2xl font-bold text-gray-800">{googleRating.rating}</span>
               <div className="flex flex-col items-start">
                 <StarRating rating={5} size={14} />
-                <span className="text-xs text-gray-500">{googleRating.totalReviews} reviews</span>
+                <span className="text-xs text-gray-500">{googleRating.totalReviews} Google reviews</span>
               </div>
             </div>
             <ExternalLink size={14} className="text-gray-400" />
           </a>
         </div>
         
+        {/* Reviews Carousel */}
         <div className="relative">
           <div className="overflow-hidden">
             <div 
@@ -78,24 +102,25 @@ const Testimonials = () => {
                   key={testimonial.id}
                   className="min-w-full px-4"
                 >
-                  <div className="max-w-3xl mx-auto bg-gradient-to-br from-[#4CAF50]/5 to-[#8BC34A]/5 rounded-2xl p-8 md:p-10">
+                  <div className={`max-w-3xl mx-auto rounded-2xl p-8 md:p-10 ${
+                    testimonial.rating === 5 
+                      ? 'bg-gradient-to-br from-[#4CAF50]/5 to-[#8BC34A]/5' 
+                      : 'bg-gradient-to-br from-blue-50 to-gray-50'
+                  }`}>
                     <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
                       <div className="flex-shrink-0">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name}
-                          className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg"
-                        />
+                        <GoogleAvatar name={testimonial.name} rating={testimonial.rating} />
                       </div>
                       <div className="text-center md:text-left flex-1">
                         <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
                           <h3 className="font-semibold text-gray-800 text-lg">{testimonial.name}</h3>
                           {testimonial.isGoogleReview && (
-                            <img 
-                              src="https://www.google.com/favicon.ico" 
-                              alt="Google Review" 
-                              className="w-4 h-4"
-                            />
+                            <svg className="w-4 h-4" viewBox="0 0 24 24">
+                              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
                           )}
                         </div>
                         <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
@@ -129,17 +154,44 @@ const Testimonials = () => {
           </button>
         </div>
         
-        {/* Dots */}
+        {/* Dots Indicator */}
         <div className="flex justify-center gap-2 mt-6">
-          {testimonials.map((_, index) => (
+          {testimonials.map((review, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`h-2 rounded-full transition-all ${
-                index === currentIndex ? 'w-8 bg-[#4CAF50]' : 'w-2 bg-gray-300'
+                index === currentIndex 
+                  ? `w-8 ${review.rating === 5 ? 'bg-[#4CAF50]' : 'bg-blue-500'}` 
+                  : 'w-2 bg-gray-300'
               }`}
             />
           ))}
+        </div>
+
+        {/* Review Summary */}
+        <div className="mt-8 flex justify-center gap-6 text-sm text-gray-600">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#4CAF50]"></div>
+            <span>{fiveStarReviews.length} Five Star Reviews</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+            <span>{fourStarReviews.length} Four Star Reviews</span>
+          </div>
+        </div>
+
+        {/* View All Reviews Link */}
+        <div className="mt-6 text-center">
+          <a 
+            href={googleRating.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#4CAF50] hover:text-[#43A047] font-medium transition-colors"
+          >
+            View all reviews on Google
+            <ExternalLink size={16} />
+          </a>
         </div>
       </div>
     </section>
