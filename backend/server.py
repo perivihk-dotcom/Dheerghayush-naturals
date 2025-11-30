@@ -1742,6 +1742,152 @@ async def admin_update_order_status(order_id: str, update_data: OrderStatusUpdat
     logger.info(f"Order {order_id} updated: {update_dict}")
     return updated
 
+@api_router.get("/admin/orders/refunds")
+async def admin_get_refund_orders(admin: dict = Depends(get_current_admin)):
+    """Get all orders with refund requests"""
+    refund_statuses = [
+        "refund_requested",
+        "refund_approved",
+        "refund_rejected",
+        "refund_processing",
+        "refund_completed"
+    ]
+    
+    orders = await db.orders.find(
+        {"order_status": {"$in": refund_statuses}},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(500)
+    
+    for order in orders:
+        if isinstance(order.get('created_at'), str):
+            order['created_at'] = datetime.fromisoformat(order['created_at'])
+    
+    return {"orders": orders, "total": len(orders)}
+
+@api_router.get("/admin/orders/replacements")
+async def admin_get_replacement_orders(admin: dict = Depends(get_current_admin)):
+    """Get all orders with replacement requests"""
+    replacement_statuses = [
+        "replacement_requested",
+        "replacement_accepted",
+        "replacement_rejected",
+        "replacement_processing",
+        "replacement_shipped",
+        "replacement_out_for_delivery",
+        "replacement_delivered"
+    ]
+    
+    orders = await db.orders.find(
+        {"order_status": {"$in": replacement_statuses}},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(500)
+    
+    for order in orders:
+        if isinstance(order.get('created_at'), str):
+            order['created_at'] = datetime.fromisoformat(order['created_at'])
+    
+    return {"orders": orders, "total": len(orders)}
+
+@api_router.put("/admin/orders/{order_id}/refund")
+async def admin_update_refund_status(order_id: str, update_data: OrderStatusUpdate, admin: dict = Depends(get_current_admin)):
+    """Update refund status for an order"""
+    order = await db.orders.find_one({"order_id": order_id})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    if not order.get('refund_status'):
+        raise HTTPException(status_code=400, detail="No refund request found for this order")
+    
+    update_dict = {k: v for k, v in update_data.model_dump().items() if v is not None}
+    
+    if 'order_status' in update_dict:
+        new_status = update_dict['order_status']
+        
+        # Update refund_status field as well
+        if new_status == 'refund_approved':
+            update_dict['refund_status'] = 'approved'
+        elif new_status == 'refund_rejected':
+            update_dict['refund_status'] = 'rejected'
+        elif new_status == 'refund_processing':
+            update_dict['refund_status'] = 'processing'
+        elif new_status == 'refund_completed':
+            update_dict['refund_status'] = 'completed'
+        
+        # Add tracking event
+        tracking_events = order.get('tracking_events', [])
+        status_descriptions = {
+            "refund_approved": "Refund approved by admin",
+            "refund_rejected": "Refund request rejected",
+            "refund_processing": "Refund is being processed",
+            "refund_completed": "Refund completed successfully"
+        }
+        
+        tracking_events.append({
+            "status": new_status,
+            "description": status_descriptions.get(new_status, f"Refund status updated to {new_status}"),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "location": None
+        })
+        update_dict['tracking_events'] = tracking_events
+    
+    await db.orders.update_one({"order_id": order_id}, {"$set": update_dict})
+    updated = await db.orders.find_one({"order_id": order_id}, {"_id": 0})
+    logger.info(f"Refund status updated for order {order_id}: {update_dict}")
+    return updated
+
+@api_router.put("/admin/orders/{order_id}/replacement")
+async def admin_update_replacement_status(order_id: str, update_data: OrderStatusUpdate, admin: dict = Depends(get_current_admin)):
+    """Update replacement status for an order"""
+    order = await db.orders.find_one({"order_id": order_id})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    if not order.get('replacement_status'):
+        raise HTTPException(status_code=400, detail="No replacement request found for this order")
+    
+    update_dict = {k: v for k, v in update_data.model_dump().items() if v is not None}
+    
+    if 'order_status' in update_dict:
+        new_status = update_dict['order_status']
+        
+        # Update replacement_status field as well
+        if new_status == 'replacement_accepted':
+            update_dict['replacement_status'] = 'accepted'
+        elif new_status == 'replacement_rejected':
+            update_dict['replacement_status'] = 'rejected'
+        elif new_status == 'replacement_processing':
+            update_dict['replacement_status'] = 'processing'
+        elif new_status == 'replacement_shipped':
+            update_dict['replacement_status'] = 'shipped'
+        elif new_status == 'replacement_out_for_delivery':
+            update_dict['replacement_status'] = 'out_for_delivery'
+        elif new_status == 'replacement_delivered':
+            update_dict['replacement_status'] = 'delivered'
+        
+        # Add tracking event
+        tracking_events = order.get('tracking_events', [])
+        status_descriptions = {
+            "replacement_accepted": "Replacement request accepted",
+            "replacement_rejected": "Replacement request rejected",
+            "replacement_processing": "Replacement order is being processed",
+            "replacement_shipped": "Replacement order has been shipped",
+            "replacement_out_for_delivery": "Replacement order is out for delivery",
+            "replacement_delivered": "Replacement order delivered successfully"
+        }
+        
+        tracking_events.append({
+            "status": new_status,
+            "description": status_descriptions.get(new_status, f"Replacement status updated to {new_status}"),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "location": None
+        })
+        update_dict['tracking_events'] = tracking_events
+    
+    await db.orders.update_one({"order_id": order_id}, {"$set": update_dict})
+    updated = await db.orders.find_one({"order_id": order_id}, {"_id": 0})
+    logger.info(f"Replacement status updated for order {order_id}: {update_dict}")
+    return updated
+
 # ==================== ADMIN BANNER ROUTES ====================
 
 @api_router.get("/admin/banners")
