@@ -15,7 +15,7 @@ const certificationImages = [
     alt: "USDA Organic Approved"
   },
   {
-    src: "https://customer-assets.emergentagent.com/job_3ccccf1b-85b9-4ba5-89ed-9254a0935033/artifacts/ww6k51mk_ChatGPT%20Image%20Nov%2030%2C%202025%2C%2003_30_57%20PM.png",
+    src: "https://customer-assets.emergentagent.com/job_cert-update/artifacts/uh2vdqbd_ChatGPT%20Image%20Nov%2030%2C%202025%2C%2003_53_18%20PM.png",
     alt: "100% Natural - No Preservatives"
   }
 ];
