@@ -1712,7 +1712,19 @@ async def admin_update_order_status(order_id: str, update_data: OrderStatusUpdat
             "shipped": "Order has been shipped",
             "out_for_delivery": "Order is out for delivery",
             "delivered": "Order delivered successfully",
-            "cancelled": "Order has been cancelled"
+            "cancelled": "Order has been cancelled",
+            "refund_requested": "Refund requested by customer",
+            "refund_approved": "Refund approved by admin",
+            "refund_rejected": "Refund request rejected",
+            "refund_processing": "Refund is being processed",
+            "refund_completed": "Refund completed successfully",
+            "replacement_requested": "Replacement requested by customer",
+            "replacement_accepted": "Replacement request accepted",
+            "replacement_rejected": "Replacement request rejected",
+            "replacement_processing": "Replacement order is being processed",
+            "replacement_shipped": "Replacement order has been shipped",
+            "replacement_out_for_delivery": "Replacement order is out for delivery",
+            "replacement_delivered": "Replacement order delivered successfully"
         }
         
         tracking_events = order.get('tracking_events', [])
