@@ -3,20 +3,20 @@ import React from 'react';
 // Certification badge images
 const certificationImages = [
   {
-    src: "https://customer-assets.emergentagent.com/job_b1975b45-1c10-40f1-aa57-d8fe88c6e242/artifacts/1ldfjpnq_generated-image.png",
-    alt: "100% Natural - No Preservatives"
-  },
-  {
-    src: "https://customer-assets.emergentagent.com/job_b1975b45-1c10-40f1-aa57-d8fe88c6e242/artifacts/cb8d5x99_generated-image%20%284%29.png",
-    alt: "Organic 100% Certified"
-  },
-  {
-    src: "https://customer-assets.emergentagent.com/job_b1975b45-1c10-40f1-aa57-d8fe88c6e242/artifacts/3u9abnoi_generated-image%20%281%29.png",
+    src: "https://customer-assets.emergentagent.com/job_3ccccf1b-85b9-4ba5-89ed-9254a0935033/artifacts/qkuqf1ws_ChatGPT%20Image%20Nov%2030%2C%202025%2C%2003_22_21%20PM.png",
     alt: "Chemical Free"
   },
   {
-    src: "https://customer-assets.emergentagent.com/job_b1975b45-1c10-40f1-aa57-d8fe88c6e242/artifacts/fco7m4ed_generated-image%20%283%29.png",
+    src: "https://customer-assets.emergentagent.com/job_3ccccf1b-85b9-4ba5-89ed-9254a0935033/artifacts/n2a528s2_ChatGPT%20Image%20Nov%2030%2C%202025%2C%2003_26_03%20PM.png",
+    alt: "Organic 100% Certified"
+  },
+  {
+    src: "https://customer-assets.emergentagent.com/job_3ccccf1b-85b9-4ba5-89ed-9254a0935033/artifacts/baw4vgau_ChatGPT%20Image%20Nov%2030%2C%202025%2C%2003_28_07%20PM.png",
     alt: "USDA Organic Approved"
+  },
+  {
+    src: "https://customer-assets.emergentagent.com/job_3ccccf1b-85b9-4ba5-89ed-9254a0935033/artifacts/ww6k51mk_ChatGPT%20Image%20Nov%2030%2C%202025%2C%2003_30_57%20PM.png",
+    alt: "100% Natural - No Preservatives"
   }
 ];
 
