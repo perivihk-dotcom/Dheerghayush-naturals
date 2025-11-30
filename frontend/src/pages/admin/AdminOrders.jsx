@@ -128,12 +128,17 @@ const AdminOrders = () => {
     switch (status) {
       case 'pending': return <Clock className="w-4 h-4" />;
       case 'confirmed': return <Package className="w-4 h-4" />;
-
       case 'shipped': return <Truck className="w-4 h-4" />;
       case 'out_for_delivery': return <Truck className="w-4 h-4" />;
       case 'delivered': return <CheckCircle className="w-4 h-4" />;
       case 'refund_requested': return <RefreshCw className="w-4 h-4" />;
       case 'replacement_requested': return <RotateCcw className="w-4 h-4" />;
+      case 'replacement_accepted': return <CheckCircle className="w-4 h-4" />;
+      case 'replacement_rejected': return <XCircle className="w-4 h-4" />;
+      case 'replacement_processing': return <Package className="w-4 h-4" />;
+      case 'replacement_shipped': return <Truck className="w-4 h-4" />;
+      case 'replacement_out_for_delivery': return <Truck className="w-4 h-4" />;
+      case 'replacement_delivered': return <CheckCircle className="w-4 h-4" />;
       case 'cancelled': return <XCircle className="w-4 h-4" />;
       default: return <Clock className="w-4 h-4" />;
     }
