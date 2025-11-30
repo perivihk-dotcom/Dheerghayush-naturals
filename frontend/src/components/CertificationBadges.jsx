@@ -52,20 +52,7 @@ export const CertificationBadgesCompact = ({ className = "" }) => {
               <img 
                 src={badge.src} 
                 alt={badge.alt}
-                className={`object-contain transform hover:scale-105 transition-transform duration-300 ${
-                  index === 3 
-                    ? 'w-40 h-40' 
-                    : index === 0
-                    ? 'h-40'
-                    : 'w-16 h-16 md:w-24 md:h-24'
-                }`}
-                style={
-                  index === 3 
-                    ? { width: '10rem', height: '10rem' } 
-                    : index === 0 
-                    ? { width: '9rem', height: '10rem' } 
-                    : {}
-                }
+                className="object-contain transform hover:scale-105 transition-transform duration-300 w-20 h-20 md:w-28 md:h-28"
               />
             </div>
           ))}
