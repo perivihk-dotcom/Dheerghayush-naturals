@@ -472,7 +472,7 @@ export const businessInfo = {
   phone2: "+91 9866569995",
   gstin: "37DKGPD9949Q1Z4",
   email: "info@dheerghayushnaturals.com",
-  address: "Hyderabad, Telangana, India",
+  address: "Survey No 599, Shop No: 1, 600, 2nd St, Beside D Mart, Ravindra Nagar, Nellore, Andhra Pradesh 524003",
   logo: "https://customer-assets.emergentagent.com/job_c67aaa90-dc21-46a0-b563-98e200682ef0/artifacts/d1j3jlmb_images.jpeg"
 };
 
