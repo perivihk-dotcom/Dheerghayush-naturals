@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { X, Mail, Lock, User, Phone, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 
 const AuthModal = ({ isOpen, onClose }) => {
   const { login, signup, isAuthenticated, user, logout } = useUser();
