@@ -156,7 +156,21 @@ const AdminDashboard = () => {
   const outForDeliveryCount = notificationCounts?.outForDeliveryCount || 0;
   const deliveredCount = notificationCounts?.deliveredCount || 0;
   
-
+  // Replacement Pipeline counts
+  const replacementRequestedCount = notificationCounts?.replacementRequestedCount || 0;
+  const replacementAcceptedCount = notificationCounts?.replacementAcceptedCount || 0;
+  const replacementProcessingCount = notificationCounts?.replacementProcessingCount || 0;
+  const replacementShippedCount = notificationCounts?.replacementShippedCount || 0;
+  const replacementOutForDeliveryCount = notificationCounts?.replacementOutForDeliveryCount || 0;
+  const replacementDeliveredCount = notificationCounts?.replacementDeliveredCount || 0;
+  const replacementRejectedCount = notificationCounts?.replacementRejectedCount || 0;
+  const totalReplacementsCount = notificationCounts?.totalReplacementsCount || 0;
+  
+  // Refund Pipeline counts (only prepaid/RAZORPAY orders)
+  const refundProcessingCount = notificationCounts?.refundProcessingCount || 0;
+  const refundCompletedCount = notificationCounts?.refundCompletedCount || 0;
+  const refundFailedCount = notificationCounts?.refundFailedCount || 0;
+  const cancelledPrepaidCount = notificationCounts?.cancelledPrepaidCount || 0;
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, badge: 0 },
