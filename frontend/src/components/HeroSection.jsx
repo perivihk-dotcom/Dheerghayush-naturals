@@ -68,7 +68,7 @@ const HeroSection = () => {
           {/* ===== MOBILE VIEW - Full Banner Style ===== */}
           <div className="absolute inset-0 md:hidden">
             {/* Background Image - Full size with contain to show complete image */}
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
+            <div className="absolute inset-0 flex items-center justify-center bg-background">
               <img 
                 src={slide.image}
                 alt={slide.title}
