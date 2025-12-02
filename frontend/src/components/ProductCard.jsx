@@ -115,12 +115,16 @@ const ProductCard = ({ product, onAddToCart, isNewArrival }) => {
         </div>
         
         {/* Stock Status */}
-        {isLowStock ? (
+        {isOutOfStock ? (
+          <div className="flex items-center gap-1 text-red-500 mb-1">
+            <span className="text-[10px] sm:text-xs font-medium">Out of Stock</span>
+          </div>
+        ) : isLowStock ? (
           <div className="flex items-center gap-1 text-red-500 mb-1">
             <AlertTriangle size={12} />
             <span className="text-[10px] sm:text-xs font-medium">Few left!</span>
           </div>
-        ) : !isOutOfStock && (
+        ) : (
           <div className="flex items-center gap-1 text-green-600 mb-1">
             <span className="text-[10px] sm:text-xs font-medium">Available</span>
           </div>
