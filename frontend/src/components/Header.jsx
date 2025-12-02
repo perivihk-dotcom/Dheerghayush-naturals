@@ -102,22 +102,42 @@ const Header = ({ cartItems, setShowCart, setShowAuth }) => {
             </div>
 
             {/* My Orders Icon */}
-            <Link 
-              to="/profile?tab=orders"
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:bg-[#2d6d4c]/10 transition-all duration-300 group"
-              title="My Orders"
-            >
-              <Package size={20} className="text-gray-600 group-hover:text-[#2d6d4c] transition-colors duration-300" />
-            </Link>
+            {isAuthenticated ? (
+              <Link 
+                to="/profile?tab=orders"
+                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:bg-[#2d6d4c]/10 transition-all duration-300 group"
+                title="My Orders"
+              >
+                <Package size={20} className="text-gray-600 group-hover:text-[#2d6d4c] transition-colors duration-300" />
+              </Link>
+            ) : (
+              <button 
+                onClick={() => setShowAuth(true)}
+                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:bg-[#2d6d4c]/10 transition-all duration-300 group"
+                title="My Orders"
+              >
+                <Package size={20} className="text-gray-600 group-hover:text-[#2d6d4c] transition-colors duration-300" />
+              </button>
+            )}
 
             {/* Location Icon */}
-            <Link 
-              to="/profile?tab=addresses"
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:bg-[#2d6d4c]/10 transition-all duration-300 group"
-              title="My Addresses"
-            >
-              <MapPin size={20} className="text-gray-600 group-hover:text-[#2d6d4c] transition-colors duration-300" />
-            </Link>
+            {isAuthenticated ? (
+              <Link 
+                to="/profile?tab=addresses"
+                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:bg-[#2d6d4c]/10 transition-all duration-300 group"
+                title="My Addresses"
+              >
+                <MapPin size={20} className="text-gray-600 group-hover:text-[#2d6d4c] transition-colors duration-300" />
+              </Link>
+            ) : (
+              <button 
+                onClick={() => setShowAuth(true)}
+                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:bg-[#2d6d4c]/10 transition-all duration-300 group"
+                title="My Addresses"
+              >
+                <MapPin size={20} className="text-gray-600 group-hover:text-[#2d6d4c] transition-colors duration-300" />
+              </button>
+            )}
 
             {/* Cart */}
             <button 
@@ -176,22 +196,48 @@ const Header = ({ cartItems, setShowCart, setShowAuth }) => {
 
             {/* Mobile Location & Orders */}
             <div className="flex gap-2 mt-4">
-              <Link 
-                to="/profile?tab=addresses"
-                onClick={() => setShowMobileMenu(false)}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300"
-              >
-                <MapPin size={20} />
-                <span>Location</span>
-              </Link>
-              <Link 
-                to="/profile"
-                onClick={() => setShowMobileMenu(false)}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300"
-              >
-                <Package size={20} />
-                <span>My Orders</span>
-              </Link>
+              {isAuthenticated ? (
+                <Link 
+                  to="/profile?tab=addresses"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300"
+                >
+                  <MapPin size={20} />
+                  <span>Location</span>
+                </Link>
+              ) : (
+                <button 
+                  onClick={() => {
+                    setShowAuth(true);
+                    setShowMobileMenu(false);
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300"
+                >
+                  <MapPin size={20} />
+                  <span>Location</span>
+                </button>
+              )}
+              {isAuthenticated ? (
+                <Link 
+                  to="/profile?tab=orders"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300"
+                >
+                  <Package size={20} />
+                  <span>My Orders</span>
+                </Link>
+              ) : (
+                <button 
+                  onClick={() => {
+                    setShowAuth(true);
+                    setShowMobileMenu(false);
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300"
+                >
+                  <Package size={20} />
+                  <span>My Orders</span>
+                </button>
+              )}
             </div>
 
             {/* Mobile Profile Button */}

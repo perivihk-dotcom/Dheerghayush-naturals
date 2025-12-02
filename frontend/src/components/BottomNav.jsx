@@ -1,12 +1,31 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, ShoppingBag, Grid, User, Package } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 
 const BottomNav = ({ setShowCart, cartItems, setShowAuth }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
   const cartCount = cartItems?.reduce((sum, item) => sum + item.quantity, 0) || 0;
   
   const isActive = (path) => location.pathname === path;
+
+  const handleOrdersClick = () => {
+    if (isAuthenticated) {
+      navigate('/profile?tab=orders');
+    } else {
+      setShowAuth(true);
+    }
+  };
+
+  const handleProfileClick = () => {
+    if (isAuthenticated) {
+      navigate('/profile');
+    } else {
+      setShowAuth(true);
+    }
+  };
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-secondary md:hidden z-40 shadow-lg">
@@ -44,8 +63,8 @@ const BottomNav = ({ setShowCart, cartItems, setShowAuth }) => {
           <span className="text-xs">Cart</span>
         </button>
 
-        <Link 
-          to="/profile?tab=orders" 
+        <button 
+          onClick={handleOrdersClick}
           className={`flex flex-col items-center gap-1 p-2 transition-colors ${
             location.pathname === '/profile' && location.search.includes('tab=orders') 
               ? 'text-[#2d6d4c]' 
@@ -54,11 +73,15 @@ const BottomNav = ({ setShowCart, cartItems, setShowAuth }) => {
         >
           <Package size={22} />
           <span className="text-xs">Orders</span>
-        </Link>
+        </button>
 
         <button 
-          onClick={() => setShowAuth(true)}
-          className="flex flex-col items-center gap-1 p-2 text-gray-500 hover:text-[#2d6d4c] transition-colors"
+          onClick={handleProfileClick}
+          className={`flex flex-col items-center gap-1 p-2 transition-colors ${
+            isActive('/profile') && !location.search.includes('tab=orders')
+              ? 'text-[#2d6d4c]' 
+              : 'text-gray-500 hover:text-[#2d6d4c]'
+          }`}
         >
           <User size={22} />
           <span className="text-xs">Profile</span>
