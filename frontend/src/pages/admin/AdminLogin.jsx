@@ -50,9 +50,9 @@ const AdminLogin = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <img 
-            src="/logo.png" 
+            src="https://customer-assets.emergentagent.com/job_c67aaa90-dc21-46a0-b563-98e200682ef0/artifacts/d1j3jlmb_images.jpeg" 
             alt="Dheerghayush Naturals Logo" 
-            className="w-24 h-24 mx-auto mb-4 object-contain"
+            className="w-24 h-24 mx-auto mb-4 object-contain rounded-xl"
           />
           <h1 className="text-2xl font-bold text-gray-900">Dheerghayush Naturals</h1>
           <p className="text-gray-600 mt-1">Admin Panel</p>
